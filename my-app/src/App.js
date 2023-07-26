@@ -3,7 +3,9 @@ import Table from "./components/Table";
 
 function App() {
     return (
-        <Table />
+        <div className="container mt-4">
+            <Table />
+        </div>
     );
 }
 
