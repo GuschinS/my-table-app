@@ -3,6 +3,7 @@ import axios from 'axios';
 import Filter from "./Filter";
 import SortData from "./SortData";
 import Pagination from "./Pagination";
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Table = () => {
     const [data, setData] = useState([]);
@@ -11,6 +12,8 @@ const Table = () => {
     const [sortDirection, setSortDirection] = useState('asc');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+    const { pageNumber } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -23,6 +26,10 @@ const Table = () => {
             });
     }, []);
 
+    useEffect(() => {
+        setCurrentPage(Number(pageNumber));
+    }, [pageNumber]);
+
     const handleSort = (column) => {
         if (column === sortColumn) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -34,6 +41,7 @@ const Table = () => {
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
+        navigate(`/page/${page}`);
     };
 
     const sortedData = SortData(filteredData, sortColumn, sortDirection);
