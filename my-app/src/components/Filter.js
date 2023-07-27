@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Filter = ({ data, setFilteredData }) => {
+const Filter = ({ data, setFilteredData, setCurrentPage  }) => {
     const [searchText, setSearchText] = useState('');
 
     const handleSearch = (event) => {
@@ -20,6 +20,7 @@ const Filter = ({ data, setFilteredData }) => {
             return false;
         });
         setFilteredData(filteredResults);
+        setCurrentPage(1);
     };
 
     return (
@@ -29,7 +30,6 @@ const Filter = ({ data, setFilteredData }) => {
                 value={searchText}
                 onChange={handleSearch}
                 placeholder="Поиск"
-
             />
             <span className="search"></span>
         </div>

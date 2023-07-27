@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Filter from "./Filter";
 import SortData from "./SortData";
+import Pagination from "./Pagination";
 
 const Table = () => {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [sortColumn, setSortColumn] = useState('id');
     const [sortDirection, setSortDirection] = useState('asc');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -29,11 +32,19 @@ const Table = () => {
         }
     };
 
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
     const sortedData = SortData(filteredData, sortColumn, sortDirection);
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
 
     return (
         <div>
-            <Filter data={data} setFilteredData={setFilteredData} />
+            <Filter data={data} setFilteredData={setFilteredData} setCurrentPage={setCurrentPage} />
             <table className="table table-bordered">
                 <thead>
                 <tr className="thead-dark">
@@ -43,7 +54,7 @@ const Table = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {filteredData.map(item => (
+                {currentItems.map(item => (
                     <tr key={item.id}>
                         <td>{item.id}</td>
                         <td>{item.title}</td>
@@ -52,9 +63,13 @@ const Table = () => {
                 ))}
                 </tbody>
             </table>
+            <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(filteredData.length / itemsPerPage)}
+                onPageChange={handlePageChange}
+            />
         </div>
     );
 };
 
 export default Table;
-
