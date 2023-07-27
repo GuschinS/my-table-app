@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/my-table-app/static/css/main.e79271b1.css",
-    "main.js": "/my-table-app/static/js/main.dbbaaf75.js",
+    "main.css": "/my-table-app/static/css/main.5045dffe.css",
+    "main.js": "/my-table-app/static/js/main.d2ae8de4.js",
+    "static/media/search.svg": "/my-table-app/static/media/search.534d1a839c2cd926be26.svg",
     "index.html": "/my-table-app/index.html",
-    "main.e79271b1.css.map": "/my-table-app/static/css/main.e79271b1.css.map",
-    "main.dbbaaf75.js.map": "/my-table-app/static/js/main.dbbaaf75.js.map"
+    "main.5045dffe.css.map": "/my-table-app/static/css/main.5045dffe.css.map",
+    "main.d2ae8de4.js.map": "/my-table-app/static/js/main.d2ae8de4.js.map"
   },
   "entrypoints": [
-    "static/css/main.e79271b1.css",
-    "static/js/main.dbbaaf75.js"
+    "static/css/main.5045dffe.css",
+    "static/js/main.d2ae8de4.js"
   ]
 }
